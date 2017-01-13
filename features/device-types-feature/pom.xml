@@ -38,6 +38,7 @@
         <module>arduino-plugin-feature</module>
         <module>raspberrypi-plugin-feature</module>
         <module>virtual-fire-alarm-plugin-feature</module>
+        <module>digital-display-plugin-feature</module>
     </modules>
 
 </project>
