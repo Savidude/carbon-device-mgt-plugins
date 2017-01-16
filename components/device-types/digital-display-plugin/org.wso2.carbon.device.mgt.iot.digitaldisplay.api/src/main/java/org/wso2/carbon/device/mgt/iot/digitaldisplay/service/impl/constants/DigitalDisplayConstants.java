@@ -35,7 +35,7 @@ public class DigitalDisplayConstants {
     public final static String SCREENSHOT_CONSTANT = "get_screenshot";
     public final static String GET_CONTENTLIST_CONSTANT = "get_content_list";
     public final static String GET_DEVICE_STATUS_CONSTANT = "get_device_status";
-    public final static String PUBLISH_TOPIC = "wso2/iot/%s/digital_display/%s/digital_display_subscriber";
+    public final static String PUBLISH_TOPIC = "%s/%s/%s/digital_display_subscriber";
     public static final String DATA_SOURCE_NAME = "jdbc/DigitalDisplayDM_DB";
 
     //mqtt tranport related constants
@@ -49,5 +49,5 @@ public class DigitalDisplayConstants {
     public static final String DEVICE_TOKEN = "DEVICE_TOKEN";
     public static final String DEVICE_REFRESH_TOKEN = "DEVICE_REFRESH_TOKEN";
 
-    public static final String APIM_APPLICATION_TOKEN_VALIDITY_PERIOD = "-1";
+    public static final String APIM_APPLICATION_TOKEN_VALIDITY_PERIOD = "2147483647";
 }

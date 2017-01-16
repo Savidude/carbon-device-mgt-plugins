@@ -525,15 +525,12 @@ public class DigitalDisplayServiceImpl implements DigitalDisplayService{
      * @param deviceId  id of the target digital display
      * @param operation operation need to execute
      * @param param     parameters need to given operation
-     * @throws DeviceMserveranagementException
      * @throws DigitalDisplayException
      */
     private void sendCommandViaMQTT(String deviceId, String operation, String param, String code)
             throws DeviceManagementException, DigitalDisplayException, OperationManagementException, InvalidDeviceException {
-        //String topic = String.format(DigitalDisplayConstants.PUBLISH_TOPIC, APIUtil.getAuthenticatedUser(),  deviceId);
-
-        String topic = APIUtil.getAuthenticatedUserTenantDomain()
-                + "/" + DigitalDisplayConstants.DEVICE_TYPE + "/" + deviceId + "/digital_display_subscriber";
+        String topic = String.format(DigitalDisplayConstants.PUBLISH_TOPIC, APIUtil.getAuthenticatedUserTenantDomain(),
+                DigitalDisplayConstants.DEVICE_TYPE, deviceId);
 
         String payload = operation + param;
 
@@ -550,13 +547,5 @@ public class DigitalDisplayServiceImpl implements DigitalDisplayService{
         List<DeviceIdentifier> deviceIdentifiers = new ArrayList<>();
         deviceIdentifiers.add(new DeviceIdentifier(deviceId, DigitalDisplayConstants.DEVICE_TYPE));
         APIUtil.getDeviceManagementService().addOperation(DigitalDisplayConstants.DEVICE_TYPE, commandOp, deviceIdentifiers);
-//        try {
-//            digitalDisplayMQTTConnector.publishToDigitalDisplay(topic, payload, 2, false);
-//        } catch (TransportHandlerException e) {
-//            String errorMessage = "Error publishing data to device with ID " + deviceId;
-//            throw new DigitalDisplayException(errorMessage, e);
-//        } finally {
-//            PrivilegedCarbonContext.endTenantFlow();
-//        }
     }
 }
