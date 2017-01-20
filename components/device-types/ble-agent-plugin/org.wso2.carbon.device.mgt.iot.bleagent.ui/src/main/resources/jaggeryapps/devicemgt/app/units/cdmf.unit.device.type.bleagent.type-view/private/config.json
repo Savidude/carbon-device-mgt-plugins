@@ -1,0 +1,7 @@
+{
+  "deviceType": {
+    "label": "BLE Agent",
+    "category": "iot",
+    "downloadAgentUri": "bleagent/device/download"
+  }
+}

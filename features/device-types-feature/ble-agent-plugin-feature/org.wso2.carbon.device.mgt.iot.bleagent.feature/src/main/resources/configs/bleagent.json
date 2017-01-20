@@ -1,0 +1,7 @@
+{
+  "deviceType": {
+    "label": "bleagent",
+    "category": "iot",
+    "downloadAgentUri": "bleagent/enrollment/devices/download"
+  }
+}
