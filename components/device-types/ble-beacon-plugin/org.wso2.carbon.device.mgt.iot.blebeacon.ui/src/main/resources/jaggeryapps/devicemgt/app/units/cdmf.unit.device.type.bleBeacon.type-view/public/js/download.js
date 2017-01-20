@@ -142,7 +142,7 @@ function addiBeacon() {
     payload.minor = $inputs[3].value;
     payload.location = $inputs[4].value;
 
-    var iBeaconRegisterUrl = "/bleBeacon/device/iBeacon/register?beaconName=" + encodeURI(payload.beaconName) + "&uuid=" +
+    var iBeaconRegisterUrl = "/blebeacon/device/iBeacon/register?beaconName=" + encodeURI(payload.beaconName) + "&uuid=" +
         encodeURI(payload.uuid) + "&major=" + encodeURI(payload.major) + "&minor=" + encodeURI(payload.minor) +
         "&location=" + encodeURI(payload.location);
 
@@ -173,7 +173,7 @@ function addEddystone(){
     payload.instance = $inputs[2].value;
     payload.location = $inputs[3].value;
 
-    var eddystoneRegisterUrl = "/bleBeacon/device/eddystone/register?beaconName=" + encodeURI(payload.beaconName) + "&namespace=" +
+    var eddystoneRegisterUrl = "/blebeacon/device/eddystone/register?beaconName=" + encodeURI(payload.beaconName) + "&namespace=" +
         encodeURI(payload.namespace) + "&instance=" + encodeURI(payload.instance) + "&location=" + encodeURI(payload.location);
 
     invokerUtil.post(
