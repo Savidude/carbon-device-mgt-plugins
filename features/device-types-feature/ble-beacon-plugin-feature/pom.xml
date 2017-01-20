@@ -21,25 +21,19 @@
 
     <parent>
         <groupId>org.wso2.carbon.devicemgt-plugins</groupId>
-        <artifactId>carbon-device-mgt-plugins-parent</artifactId>
+        <artifactId>device-types-feature</artifactId>
         <version>3.0.7-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>device-types-feature</artifactId>
-    <version>3.0.7-SNAPSHOT</version>
+    <artifactId>ble-beacon-plugin-feature</artifactId>
     <packaging>pom</packaging>
-    <name>WSO2 Carbon - Device Management IoT Plugins Feature</name>
+    <name>WSO2 Carbon - IoT Server BLE Beacon Device Feature</name>
     <url>http://wso2.org</url>
 
     <modules>
-        <module>androidsense-plugin-feature</module>
-        <module>arduino-plugin-feature</module>
-        <module>raspberrypi-plugin-feature</module>
-        <module>virtual-fire-alarm-plugin-feature</module>
-        <module>ble-agent-plugin-feature</module>
-        <module>ble-beacon-plugin-feature</module>
+        <module>org.wso2.carbon.device.mgt.iot.blebeacon.feature</module>
     </modules>
 
 </project>

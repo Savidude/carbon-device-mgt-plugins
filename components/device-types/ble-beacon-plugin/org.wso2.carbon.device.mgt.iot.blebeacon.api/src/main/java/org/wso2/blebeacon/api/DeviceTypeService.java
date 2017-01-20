@@ -16,7 +16,8 @@
 * under the License.
 */
 
-package org.wso2.bleagent.api;
+package org.wso2.blebeacon.api;
+
 
 import io.swagger.annotations.*;
 import org.wso2.carbon.apimgt.annotations.api.Scope;
@@ -31,13 +32,13 @@ import javax.ws.rs.core.Response;
                 title = "",
                 extensions = {
                         @Extension(properties = {
-                                @ExtensionProperty(name = "name", value = "bleagent"),
-                                @ExtensionProperty(name = "context", value = "/bleagent"),
+                                @ExtensionProperty(name = "name", value = "blebeacon"),
+                                @ExtensionProperty(name = "context", value = "/blebeacon"),
                         })
                 }
         ),
         tags = {
-                @Tag(name = "bleagent", description = "")
+                @Tag(name = "blebeacon", description = "")
         }
 )
 @Scopes(
@@ -45,22 +46,25 @@ import javax.ws.rs.core.Response;
                 @Scope(
                         name = "Enroll device",
                         description = "",
-                        key = "perm:bleagent:enroll",
-                        permissions = {"/device-mgt/devices/enroll/bleagent"}
+                        key = "perm:blebeacon:enroll",
+                        permissions = {"/device-mgt/devices/enroll/blebeacon"}
                 )
         }
 )
-
+/**
+ * This is the controller API which is used to control agent side functionality
+ */
 public interface DeviceTypeService {
 
-    @Path("device/eddystone/connect")
+    @Path("device/iBeacon/register")
     @POST
-    Response eddystoneConnect(@QueryParam("namespace") String namespace,
-                              @QueryParam("instance") String instance,
-                              @QueryParam("profile") String profile);
+    Response registerIBeacon(@QueryParam("beaconName") String beaconName, @QueryParam("uuid") String uuid,
+                             @QueryParam("major") String major, @QueryParam("minor") String minor,
+                             @QueryParam("location") String location);
 
-    @Path("device/download")
-    @GET
-    @Produces("application/zip")
-    Response downloadSketch(@QueryParam("deviceName") String deviceName, @QueryParam("sketchType") String sketchType);
+    @Path("device/eddystone/register")
+    @POST
+    Response registerEddystone(@QueryParam("beaconName") String beaconName, @QueryParam("namespace") String namespace,
+                               @QueryParam("instance") String instance, @QueryParam("location") String location);
+
 }

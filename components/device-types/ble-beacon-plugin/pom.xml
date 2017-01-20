@@ -21,37 +21,21 @@
 
     <parent>
         <groupId>org.wso2.carbon.devicemgt-plugins</groupId>
-        <artifactId>carbon-device-mgt-plugins-parent</artifactId>
+        <artifactId>device-types</artifactId>
         <version>3.0.7-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>device-types</artifactId>
+    <artifactId>ble-beacon-plugin</artifactId>
     <packaging>pom</packaging>
-    <name>WSO2 Carbon - IoT Plugins</name>
+    <name>WSO2 Carbon - BLE Beacon Plugin</name>
     <url>http://wso2.org</url>
 
     <modules>
-        <module>androidsense-plugin</module>
-        <module>arduino-plugin</module>
-        <module>raspberrypi-plugin</module>
-        <module>virtual-fire-alarm-plugin</module>
-        <module>ble-agent-plugin</module>
-        <module>ble-beacon-plugin</module>
+        <!--<module>org.wso2.carbon.device.mgt.iot.blebeacon.ui</module>-->
+        <module>org.wso2.carbon.device.mgt.iot.blebeacon.api</module>
     </modules>
-    <dependencies>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>RELEASE</version>
-        </dependency>
-    </dependencies>
 
     <build>
         <pluginManagement>
@@ -72,5 +56,4 @@
             </plugins>
         </pluginManagement>
     </build>
-
 </project>

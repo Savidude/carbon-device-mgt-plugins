@@ -1,0 +1,7 @@
+{
+  "deviceType": {
+    "label": "BLE Beacon",
+    "category": "virtual",
+    "downloadAgentUri": "blebeacon/enrollment/devices/download"
+  }
+}
