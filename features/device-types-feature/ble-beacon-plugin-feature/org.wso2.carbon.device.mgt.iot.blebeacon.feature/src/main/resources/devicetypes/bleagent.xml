@@ -17,7 +17,7 @@
   ~ specific language governing permissions and limitations
   ~ under the License.
   -->
-<DeviceTypeConfiguration name="bleagent">
+<DeviceTypeConfiguration name="blebeacon">
 
     <ProvisioningConfig>
         <SharedWithAllTenants>false</SharedWithAllTenants>
