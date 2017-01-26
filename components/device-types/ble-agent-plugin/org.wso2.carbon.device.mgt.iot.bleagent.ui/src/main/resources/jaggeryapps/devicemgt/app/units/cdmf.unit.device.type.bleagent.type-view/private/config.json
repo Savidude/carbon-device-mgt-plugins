@@ -2,6 +2,9 @@
   "deviceType": {
     "label": "BLE Agent",
     "category": "iot",
-    "downloadAgentUri": "bleagent/device/download"
+    "downloadAgentUri": "bleagent/device/download",
+    "scopes" : [
+      "perm:bleagent:enroll"
+    ]
   }
 }
