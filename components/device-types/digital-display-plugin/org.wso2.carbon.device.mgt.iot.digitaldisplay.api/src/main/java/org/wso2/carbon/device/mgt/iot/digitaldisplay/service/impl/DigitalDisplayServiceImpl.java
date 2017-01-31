@@ -375,7 +375,7 @@ public class DigitalDisplayServiceImpl implements DigitalDisplayService{
                 params = type + "|" + time + "|" + path + "|" + name;
             } else {
                 params = type + "|" + time + "|" + path + "|" + name +
-                        "|" + "after=" + position;
+                        "|" + position;
             }
             sendCommandViaMQTT(deviceId, sessionId + "::" + DigitalDisplayConstants.ADD_NEW_RESOURCE_CONSTANT + "::",
                     params, "add-resource");
