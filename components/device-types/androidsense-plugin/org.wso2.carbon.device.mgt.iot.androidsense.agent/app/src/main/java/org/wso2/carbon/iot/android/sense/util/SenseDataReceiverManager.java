@@ -38,6 +38,7 @@ import org.wso2.carbon.iot.android.sense.event.streams.call.CallDataReceiver;
 import org.wso2.carbon.iot.android.sense.event.streams.data.NetworkDataReader;
 import org.wso2.carbon.iot.android.sense.event.streams.screen.ScreenDataReceiver;
 import org.wso2.carbon.iot.android.sense.event.streams.sms.SmsDataReceiver;
+import org.wso2.carbon.iot.android.sense.event.streams.sound.SoundDataReader;
 
 public class SenseDataReceiverManager {
     private static BroadcastReceiver batteryDataReceiver;
@@ -53,6 +54,8 @@ public class SenseDataReceiverManager {
     private static ApplicationDataReceiver appDataReceiver;
 
     private static NetworkDataReader networkDataReader;
+
+    private static SoundDataReader soundDataReader;
 
     private SenseDataReceiverManager() {
 
@@ -193,5 +196,18 @@ public class SenseDataReceiverManager {
         networkDataReader = null;
     }
 
+    public static void registerSoundDataReader() {
+        if (soundDataReader == null){
+            soundDataReader = new SoundDataReader();
+            soundDataReader.execute();
+        }
+    }
+
+    public static void unregisterSoundDataReader() {
+        if (soundDataReader != null){
+            soundDataReader.cancel(true);
+        }
+        soundDataReader = null;
+    }
 
 }

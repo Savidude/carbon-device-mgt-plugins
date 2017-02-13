@@ -72,6 +72,12 @@ public class Event {
     private long dataSent;
     private long dataReceived;
 
+    /**
+     * Sound data
+     * Amplitude
+     * */
+    private double amplitude;
+
     private int getBattery() {
         return battery;
     }
@@ -452,6 +458,19 @@ public class Event {
         this.dataReceived = dataReceived;
     }
 
+
+
+
+    public double getAmplitude(){
+        this.type = "sound";
+        return amplitude;
+    }
+
+    public void setAmplitude(double amplitude){
+        this.type = "sound";
+        this.amplitude = amplitude;
+    }
+
     public JSONObject getEvent() throws JSONException {
         JSONObject jsonEvent = new JSONObject();
         JSONObject jsonMetaData = new JSONObject();
@@ -547,6 +566,9 @@ public class Event {
         jsonPayloadData.put("data_type", getDataType());
         jsonPayloadData.put("data_received", getDataReceived());
         jsonPayloadData.put("data_sent", getDataSent());
+
+        //Sound
+        jsonPayloadData.put("amplitude", getAmplitude());
 
         jsonEvent.put("payloadData", jsonPayloadData);
 
