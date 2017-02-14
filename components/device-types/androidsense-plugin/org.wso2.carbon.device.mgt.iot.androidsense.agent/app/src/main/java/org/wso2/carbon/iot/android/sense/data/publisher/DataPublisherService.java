@@ -31,7 +31,6 @@ import org.wso2.carbon.iot.android.sense.data.publisher.mqtt.transport.MQTTTrans
 import org.wso2.carbon.iot.android.sense.data.publisher.mqtt.transport.TransportHandlerException;
 import org.wso2.carbon.iot.android.sense.event.streams.location.LocationData;
 import org.wso2.carbon.iot.android.sense.event.streams.sensor.SensorData;
-import org.wso2.carbon.iot.android.sense.event.streams.sound.SoundData;
 import org.wso2.carbon.iot.android.sense.event.streams.speed.SpeedData;
 import org.wso2.carbon.iot.android.sense.event.streams.activity.ActivityData;
 import org.wso2.carbon.iot.android.sense.event.streams.application.ApplicationData;
@@ -289,17 +288,6 @@ public class DataPublisherService extends Service {
                         }
                     }
                     SenseDataHolder.resetNetworkDataHolder();
-
-                    List<SoundData> soundDataList = SenseDataHolder.getSoundDataHolder();
-                    if(!soundDataList.isEmpty()){
-                        for (SoundData soundData : soundDataList){
-                            Event event = new Event();
-                            event.setTimestamp(soundData.getTimestamp());
-                            event.setAmplitude(soundData.getAmplitude());
-                            events.add(event);
-                        }
-                    }
-                    SenseDataHolder.resetSoundDataHolder();
 
                     //publish the data
                     if (events.size() > 0 && LocalRegistry.isEnrolled(context)) {

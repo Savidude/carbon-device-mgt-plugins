@@ -57,7 +57,7 @@ public class SenseService extends Service {
         SenseDataReceiverManager.registerSmsDataReceiver(this);
         SenseDataReceiverManager.registerAppDataReceiver(this);
         SenseDataReceiverManager.registerNetworkDataReader(this);
-        SenseDataReceiverManager.registerSoundDataReader();
+        SenseDataReceiverManager.registerSoundDataReader(this);
         //service will not be stopped until we manually stop the service
         return Service.START_NOT_STICKY;
 

@@ -16,7 +16,6 @@ package org.wso2.carbon.iot.android.sense.util;
 import org.wso2.carbon.iot.android.sense.beacon.BeaconScanedData;
 import org.wso2.carbon.iot.android.sense.event.streams.location.LocationData;
 import org.wso2.carbon.iot.android.sense.event.streams.sensor.SensorData;
-import org.wso2.carbon.iot.android.sense.event.streams.sound.SoundData;
 import org.wso2.carbon.iot.android.sense.event.streams.speed.SpeedData;
 import org.wso2.carbon.iot.android.sense.event.streams.activity.ActivityData;
 import org.wso2.carbon.iot.android.sense.event.streams.application.ApplicationData;
@@ -50,7 +49,6 @@ public class SenseDataHolder {
     private static List<SmsData> smsDataHolder;
     private static List<ApplicationData> applicationDataHolder;
     private static List<NetworkData> networkDataHolder;
-    private static List<SoundData> soundDataHolder;
     //LocationData gps;
 
 
@@ -152,14 +150,6 @@ public class SenseDataHolder {
         return networkDataHolder;
     }
 
-    public static List<SoundData> getSoundDataHolder(){
-        if(soundDataHolder == null){
-            soundDataHolder = new CopyOnWriteArrayList<>();
-        }
-        return  soundDataHolder;
-    }
-
-
     public static void resetSensorDataHolder() {
         sensorDataHolder = null;
     }
@@ -210,9 +200,5 @@ public class SenseDataHolder {
 
     public static void resetNetworkDataHolder() {
         networkDataHolder = null;
-    }
-
-    public static void resetSoundDataHolder(){
-        soundDataHolder = null;
     }
 }

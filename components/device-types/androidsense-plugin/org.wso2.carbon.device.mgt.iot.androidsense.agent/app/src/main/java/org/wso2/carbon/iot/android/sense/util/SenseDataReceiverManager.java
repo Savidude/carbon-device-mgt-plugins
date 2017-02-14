@@ -196,9 +196,9 @@ public class SenseDataReceiverManager {
         networkDataReader = null;
     }
 
-    public static void registerSoundDataReader() {
+    public static void registerSoundDataReader(Context context) {
         if (soundDataReader == null){
-            soundDataReader = new SoundDataReader();
+            soundDataReader = new SoundDataReader(context);
             soundDataReader.execute();
         }
     }

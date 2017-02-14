@@ -16,17 +16,23 @@ import java.util.Date;
  */
 public class SoundDataReader extends AsyncTask<Void, Void, Long>{
 
-    private SoundData soundData;
+    private SoundDataPublisher soundDataPublisher;
     private MediaRecorder mediaRecorder;
     private Handler mHandler = new Handler();
+    private Context context;
 
-    public SoundDataReader(){
+    public SoundDataReader(Context context){
+        this.context = context;
     }
 
     @Override
     protected Long doInBackground(Void... voids) {
         mediaRecorder = new MediaRecorder();
-        soundData = new SoundData();
+        soundDataPublisher = new SoundDataPublisher(context);
+
+        soundDataPublisher.setUser();
+        soundDataPublisher.setDeviceId();
+
         try{
             mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
             mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
@@ -35,7 +41,7 @@ public class SoundDataReader extends AsyncTask<Void, Void, Long>{
             mediaRecorder.prepare();
             mediaRecorder.start();
 
-            mHandler.postDelayed(mRunnable, 5000);
+            mHandler.postDelayed(mRunnable, 2000);
         } catch (IOException e) {
             Log.e("Error", "Could not start media recorder");
         }
@@ -45,10 +51,10 @@ public class SoundDataReader extends AsyncTask<Void, Void, Long>{
     private final Runnable mRunnable = new Runnable() {
         @Override
         public void run() {
-            soundData.setTimestamp(new Date().getTime());
-            soundData.setAmplitude(mediaRecorder.getMaxAmplitude());
-            SenseDataHolder.getSoundDataHolder().add(soundData);
-            mHandler.postDelayed(mRunnable, 5000);
+            soundDataPublisher.setTimestamp(new Date().getTime());
+            soundDataPublisher.setAmplitude(mediaRecorder.getMaxAmplitude());
+            soundDataPublisher.publishSoundData();
+            mHandler.postDelayed(mRunnable, 2000);
         }
     };
 }
