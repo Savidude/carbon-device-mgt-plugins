@@ -25,6 +25,7 @@
 
     <property name="Android_Sense_dir" value="androidsense"/>
     <property name="Wordcounter_dir" value="word_count"/>
+    <property name="Sound_dir" value="sound"/>
 
     <target name="clean">
         <delete dir="${target-dir}" />
@@ -37,6 +38,9 @@
         </zip>
         <zip destfile="${target-dir}/${Wordcounter_dir}.car">
             <zipfileset dir="${src-dir}/${Wordcounter_dir}"/>
+        </zip>
+        <zip destfile="${target-dir}/${Sound_dir}.car">
+            <zipfileset dir="${src-dir}/${Sound_dir}"/>
         </zip>
     </target>
 </project>

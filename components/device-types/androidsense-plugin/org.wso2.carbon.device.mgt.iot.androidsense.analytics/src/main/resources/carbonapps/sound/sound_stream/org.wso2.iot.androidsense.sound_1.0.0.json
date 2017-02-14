@@ -1,0 +1,16 @@
+{
+  "name": "org.wso2.iot.androidsense.sound",
+  "version": "1.0.0",
+  "nickName": "android sense sound",
+  "description": "Sound data received from Android Sense",
+  "metaData": [
+    {"name":"owner","type":"STRING"},
+    {"name":"deviceId","type":"STRING"},
+    {"name":"time","type":"LONG"}
+  ],
+  "payloadData": [
+    {
+      "name": "amplitude","type": "DOUBLE"
+    }
+  ]
+}
