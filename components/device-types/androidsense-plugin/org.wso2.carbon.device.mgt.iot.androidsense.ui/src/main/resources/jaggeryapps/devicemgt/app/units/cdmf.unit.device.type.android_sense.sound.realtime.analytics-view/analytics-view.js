@@ -35,7 +35,7 @@ function onRequest(context) {
         if (tokenPair) {
             token = tokenPair.accessToken;
         }
-        websocketEndpoint = websocketEndpoint + "/secured-websocket/org.wso2.iot.androidsense.amplitude/1.0.0?" +
+        websocketEndpoint = websocketEndpoint + "/secured-websocket/org.wso2.iot.devices.androidsense.amplitude/1.0.0?"
             + "deviceId=" + device.deviceIdentifier + "&deviceType=" + device.type + "&websocketToken=" + token;
     }
     return {"device": device, "websocketEndpoint": websocketEndpoint};

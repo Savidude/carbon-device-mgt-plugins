@@ -10,7 +10,7 @@
   ],
   "payloadData": [
     {
-      "name": "amplitude","type": "DOUBLE"
+      "name": "amplitude","type": "FLOAT"
     }
   ]
 }

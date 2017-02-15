@@ -22,5 +22,11 @@
         <dependency artifact="sound_stream" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
         <dependency artifact="sound_receiver" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
         <dependency artifact="sound_execution" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+        <dependency artifact="sound_publisher" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+
+
+        <dependency artifact="amplitude_stream" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+        <dependency artifact="amplitude_store" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
+        <dependency artifact="amplitude_script" version="1.0.0" include="true" serverRole="DataAnalyticsServer"/>
     </artifact>
 </artifacts>

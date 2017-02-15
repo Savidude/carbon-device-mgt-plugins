@@ -7,14 +7,11 @@
 /* define streams/tables and write queries here ... */
 
 @Import('org.wso2.iot.androidsense.sound:1.0.0')
-define stream sound (meta_owner string, meta_deviceId string, meta_time long, amplitude double);
+define stream sound (meta_owner string, meta_deviceId string, meta_time long, amplitude float);
 
 @Export('org.wso2.iot.devices.androidsense.amplitude:1.0.0')
-define stream amplitude (meta_owner string, meta_deviceType string, meta_deviceId string, meta_time long, amplitude double);
+define stream amplitude (meta_owner string, meta_deviceType string, meta_deviceId string, meta_time long, amplitude float);
 
 from sound
-select meta_owner, 'androidsense.sound' as meta_deviceType, meta_deviceId, meta_time * 1000 as meta_time, amplitude
+select meta_owner, 'androidsense-sound' as meta_deviceType, meta_deviceId, meta_time * 1000 as meta_time, amplitude
 insert into amplitude;
-
-
-
