@@ -17,7 +17,7 @@
   ~ under the License.
   -->
 
-<artifact name= "sound_stream" version="1.0.0" type="event/stream" serverRole="DataAnalyticsServer">
+<artifact name= "amplitude_stream" version="1.0.0" type="event/stream" serverRole="DataAnalyticsServer">
     <file>org.wso2.iot.devices.androidsense.amplitude_1.0.0.json</file>
 </artifact>
 

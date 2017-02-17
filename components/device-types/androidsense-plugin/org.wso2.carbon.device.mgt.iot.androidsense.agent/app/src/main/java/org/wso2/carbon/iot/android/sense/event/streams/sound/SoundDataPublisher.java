@@ -66,22 +66,24 @@ public class SoundDataPublisher {
 
     public void publishSoundData() {
         JSONObject soundData = new JSONObject();
+        JSONObject eventData = new JSONObject();
 
         try {
             JSONObject metadata = new JSONObject();
             metadata.put("owner", user);
             metadata.put("deviceId", deviceId);
             metadata.put("time", getTimestamp());
-            soundData.put("metaData", metadata);
+            eventData.put("metaData", metadata);
 
             JSONObject payloadData = new JSONObject();
             payloadData.put("amplitude", getAmplitude());
-            soundData.put("payloadData", payloadData);
+            eventData.put("payloadData", payloadData);
 
             MQTTTransportHandler mqttTransportHandler = AndroidSenseMQTTHandler.getInstance(context);
             if (!mqttTransportHandler.isConnected()) {
                 mqttTransportHandler.connect();
             }
+            soundData.put("event", eventData);
             String topic = LocalRegistry.getTenantDomain(context) + "/" + SenseConstants.DEVICE_TYPE + "/" + deviceId + "/sound";
             mqttTransportHandler.publishDeviceData(user, deviceId, soundData.toString(), topic);
         } catch (JSONException e) {
