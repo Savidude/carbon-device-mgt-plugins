@@ -37,6 +37,7 @@
         <module>arduino-plugin</module>
         <module>raspberrypi-plugin</module>
         <module>virtual-fire-alarm-plugin</module>
+        <module>mindwave-plugin</module>
     </modules>
 
     <build>

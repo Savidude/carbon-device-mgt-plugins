@@ -38,6 +38,7 @@
         <module>arduino-plugin-feature</module>
         <module>raspberrypi-plugin-feature</module>
         <module>virtual-fire-alarm-plugin-feature</module>
+        <module>mindwave-plugin-feature</module>
     </modules>
 
 </project>
