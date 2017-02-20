@@ -70,6 +70,7 @@ $(window).load(function () {
 	});
 
 	var websocketUrl = $("#div-chart").data("websocketurl");
+	console.log("websocketurl: " + websocketUrl);
 	connect(websocketUrl)
 });
 
@@ -88,10 +89,13 @@ function connect(target) {
 	}
 	if (ws) {
 		ws.onmessage = function (event) {
+			console.log("Message received");
 			var dataPoint = JSON.parse(event.data);
+			var time = dataPoint.event.metaData.time;
+			var amplitude = dataPoint.event.payloadData.amplitude;
 			chartData.push({
-				x: parseInt(dataPoint[4]) / 1000,
-				y: parseFloat(dataPoint[5])
+				x: parseInt(time) / 1000,
+				y: parseFloat(amplitude)
 			});
 			chartData.shift();
 			graph.update();

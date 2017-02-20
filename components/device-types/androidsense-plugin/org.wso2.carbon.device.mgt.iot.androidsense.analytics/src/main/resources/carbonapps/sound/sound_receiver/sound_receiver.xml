@@ -18,7 +18,7 @@
   -->
 <eventReceiver name="sound_receiver" statistics="disable" trace="disable" xmlns="http://wso2.org/carbon/eventreceiver">
     <from eventAdapterType="oauth-mqtt">
-        <property name="topic">carbon.super/androidsense/+/sound</property>
+        <property name="topic">carbon.super/android_sense/+/sound</property>
         <property name="username">admin</property>
         <property name="password">admin</property>
         <property name="contentValidator">org.wso2.carbon.device.mgt.input.adapter.mqtt.util.MQTTContentValidator</property>
