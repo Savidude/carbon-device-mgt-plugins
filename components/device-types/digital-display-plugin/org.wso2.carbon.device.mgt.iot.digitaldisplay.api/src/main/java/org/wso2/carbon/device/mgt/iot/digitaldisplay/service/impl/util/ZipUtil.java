@@ -51,7 +51,7 @@ public class ZipUtil {
     private static final String CONFIG_TYPE = "general";
 
     public ZipArchive createZipFile(String owner, String deviceType, String deviceId, String deviceName,
-                                   String token, String refreshToken)
+                                   String token, String refreshToken, String consumerKey, String consumerSecret)
             throws DeviceManagementException {
 
         String sketchFolder = "repository" + File.separator + "resources" + File.separator + "sketches";
@@ -89,6 +89,9 @@ public class ZipUtil {
             contextParams.put(DigitalDisplayConstants.MQTT_EP, mqttEndpoint);
             contextParams.put(DigitalDisplayConstants.DEVICE_TOKEN, token);
             contextParams.put(DigitalDisplayConstants.DEVICE_REFRESH_TOKEN, refreshToken);
+            contextParams.put(DigitalDisplayConstants.CONSUMER_KEY, consumerKey);
+            contextParams.put(DigitalDisplayConstants.CONSUMER_SECRET, consumerSecret);
+            contextParams.put(DigitalDisplayConstants.SERVER_IP, iotServerIP);
 
             ZipArchive zipFile;
             zipFile = getSketchArchive(archivesPath, templateSketchPath, contextParams, deviceName);

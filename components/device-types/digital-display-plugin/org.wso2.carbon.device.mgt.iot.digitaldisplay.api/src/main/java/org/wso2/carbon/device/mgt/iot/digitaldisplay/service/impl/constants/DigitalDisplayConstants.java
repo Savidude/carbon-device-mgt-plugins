@@ -48,6 +48,9 @@ public class DigitalDisplayConstants {
     public static final String MQTT_EP = "MQTT_EP";
     public static final String DEVICE_TOKEN = "DEVICE_TOKEN";
     public static final String DEVICE_REFRESH_TOKEN = "DEVICE_REFRESH_TOKEN";
+    public static final String CONSUMER_KEY = "COMSUMER_KEY";
+    public static final String CONSUMER_SECRET = "CONSUMER_SECRET";
+    public static final String SERVER_IP = "SERVER_IP";
 
-    public static final String APIM_APPLICATION_TOKEN_VALIDITY_PERIOD = "2147483647";
+    public static final String APIM_APPLICATION_TOKEN_VALIDITY_PERIOD = "3600";
 }

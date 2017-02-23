@@ -184,6 +184,11 @@ public class DigitalDisplayServiceImpl implements DigitalDisplayService{
         //create token
         String accessToken = accessTokenInfo.getAccessToken();
         String refreshToken = accessTokenInfo.getRefreshToken();
+
+        //Getting consumer key and secret
+        String consumerKey = apiApplicationKey.getConsumerKey();
+        String consumerSecret = apiApplicationKey.getConsumerSecret();
+
         //adding registering data
         boolean status;
         //Register the device with CDMF
@@ -194,7 +199,7 @@ public class DigitalDisplayServiceImpl implements DigitalDisplayService{
         }
         ZipUtil ziputil = new ZipUtil();
         ZipArchive zipFile = ziputil.createZipFile(owner, DigitalDisplayConstants.DEVICE_TYPE, deviceId, deviceName,
-                accessToken, refreshToken);
+                accessToken, refreshToken, consumerKey, consumerSecret);
         return zipFile;
     }
 
