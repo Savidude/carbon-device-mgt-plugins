@@ -13,6 +13,7 @@
  */
 package org.wso2.carbon.iot.android.sense.realtimeviewer;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -20,6 +21,7 @@ import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -49,12 +51,14 @@ import org.wso2.carbon.iot.android.sense.realtimeviewer.event.realtimesensor.Rea
 import org.wso2.carbon.iot.android.sense.realtimeviewer.sensorlisting.SupportedSensors;
 import org.wso2.carbon.iot.android.sense.realtimeviewer.view.adaptor.SensorViewAdaptor;
 import org.wso2.carbon.iot.android.sense.realtimeviewer.view.sensor.selector.SelectSensorDialog;
+import org.wso2.carbon.iot.android.sense.speech.command.CommandRecognition;
 import org.wso2.carbon.iot.android.sense.speech.detector.WordRecognitionActivity;
 import org.wso2.carbon.iot.android.sense.beacon.MonitoringActivity;
 
 import org.wso2.carbon.iot.android.sense.util.LocalRegistry;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 import org.altbeacon.beacon.BeaconManager;
 
@@ -66,6 +70,8 @@ import agent.sense.android.iot.carbon.wso2.org.wso2_senseagent.R;
 
 public class ActivitySelectSensor extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, SelectSensorDialog.SensorListListener {
+
+    private final int REQ_CODE_SPEECH_INPUT = 100;
 
     private SharedPreferences sharedPreferences;
     private SelectSensorDialog sensorDialog = new SelectSensorDialog();
@@ -142,6 +148,14 @@ public class ActivitySelectSensor extends AppCompatActivity
 //
 //            }
 //        });
+
+        FloatingActionButton fbtnSpeechRecongnizer = (FloatingActionButton) findViewById(R.id.speech);
+        fbtnSpeechRecongnizer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                askSpeechInput();
+            }
+        });
 
 //        FloatingActionButton fbtnBeaconMonitor = (FloatingActionButton) findViewById(R.id.beacon);
 //        fbtnBeaconMonitor.setOnClickListener(new View.OnClickListener() {
@@ -352,4 +366,40 @@ public class ActivitySelectSensor extends AppCompatActivity
 //        }
 //
 //    }
+
+    private void askSpeechInput() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
+                "Hi speak something");
+        try {
+            startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
+        } catch (ActivityNotFoundException a) {
+
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case REQ_CODE_SPEECH_INPUT: {
+                if (resultCode == RESULT_OK && null != data) {
+
+                    ArrayList<String> result = data
+                            .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    String voiceInput = result.get(0);
+                    Toast.makeText(getApplicationContext(), "You said \"" + voiceInput + "\".", Toast.LENGTH_SHORT).show();
+                    CommandRecognition command = new CommandRecognition(voiceInput, getApplicationContext());
+                    String response = command.executeCommand();
+                    Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+                }
+                break;
+            }
+
+        }
+    }
 }
