@@ -205,7 +205,7 @@ public class SenseDataReceiverManager {
 
     public static void unregisterSoundDataReader() {
         if (soundDataReader != null){
-            soundDataReader.cancel(true);
+            soundDataReader.stopSoundDataReader();
         }
         soundDataReader = null;
     }

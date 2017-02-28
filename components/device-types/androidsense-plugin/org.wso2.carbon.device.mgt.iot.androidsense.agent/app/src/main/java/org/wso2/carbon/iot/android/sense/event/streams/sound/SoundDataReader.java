@@ -51,10 +51,19 @@ public class SoundDataReader extends AsyncTask<Void, Void, Long>{
     private final Runnable mRunnable = new Runnable() {
         @Override
         public void run() {
-            soundDataPublisher.setTimestamp(new Date().getTime());
-            soundDataPublisher.setAmplitude(mediaRecorder.getMaxAmplitude());
-            soundDataPublisher.publishSoundData();
-            mHandler.postDelayed(mRunnable, 2000);
+            if (mediaRecorder != null){
+                soundDataPublisher.setTimestamp(new Date().getTime());
+                soundDataPublisher.setAmplitude(mediaRecorder.getMaxAmplitude());
+                soundDataPublisher.publishSoundData();
+                mHandler.postDelayed(mRunnable, 2000);
+            }
         }
     };
+
+    public void stopSoundDataReader(){
+        if (mediaRecorder != null){
+            mediaRecorder.stop();
+            mediaRecorder = null;
+        }
+    }
 }
