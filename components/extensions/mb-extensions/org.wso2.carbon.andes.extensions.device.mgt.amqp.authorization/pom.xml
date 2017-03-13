@@ -95,17 +95,16 @@
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.artifactId}</Bundle-Name>
                         <Private-Package>
-                            org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization.internal
+                            org.wso2.carbon.andes.extensions.device.mgt.amqp.authorization.internal
                         </Private-Package>
                         <Export-Package>
-                            !org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization.internal,
-                            org.wso2.carbon.andes.extensions.device.mgt.mqtt.authorization.*
+                            !org.wso2.carbon.andes.extensions.device.mgt.amqp.authorization.internal,
+                            org.wso2.carbon.andes.extensions.device.mgt.amqp.authorization.*
                         </Export-Package>
                         <Import-Package>
                             org.apache.log4j,
-                            org.dna.mqtt.moquette.server,
+                            org.wso2.andes.server.security.auth.amqp,
                             org.wso2.andes.configuration.enums,
-                            org.wso2.andes.mqtt,
                             org.wso2.carbon.context,
                             org.jaxen,
                             org.apache.axiom.*,
