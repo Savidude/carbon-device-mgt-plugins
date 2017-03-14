@@ -16,7 +16,7 @@ import org.wso2.carbon.user.core.service.RealmService;
  * bind="setRealmService"
  * unbind="unsetRealmService"
  */
-
+@SuppressWarnings("unused")
 public class AuthorizationServiceComponent {
 
     private static Log log = LogFactory.getLog(AuthorizationServiceComponent.class);

@@ -74,8 +74,9 @@ public class DeviceAccessBasedAMQPAuthorizer implements IAuthorizer {
             return false;
         }
 
+        String topicProperties[] = topics[1].split("\\.");
         Cache<AuthorizationCacheKey, Boolean> cache = getCache();
-        if (topics.length < 3){
+        if (topicProperties.length < 2){
             AuthorizationCacheKey key = new AuthorizationCacheKey(tenantDomainFromTopic, username, "", "");
             if (cache.get(key) != null && cache.get(key)) {
                 return true;
@@ -98,8 +99,8 @@ public class DeviceAccessBasedAMQPAuthorizer implements IAuthorizer {
             }
         }
 
-        String deviceType = topics[1];
-        String deviceId = topics[2];
+        String deviceType = topicProperties[0];
+        String deviceId = topicProperties[1];
         AuthorizationCacheKey key = new AuthorizationCacheKey(tenantDomainFromTopic, username, deviceId, deviceType);
         if (cache.get(key) != null && cache.get(key)) {
             return true;
