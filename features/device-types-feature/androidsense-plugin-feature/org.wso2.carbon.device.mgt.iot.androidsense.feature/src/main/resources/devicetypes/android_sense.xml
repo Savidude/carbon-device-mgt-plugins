@@ -46,6 +46,14 @@
                 <!--</QueryParameters>-->
             <!--</Operation>-->
         </Feature>
+
+        <Feature code="take-photo">
+            <Name>Take Photo</Name>
+            <Description>Takes photo from camera</Description>
+            <Operation context="/android_sense/device/{deviceId}/take-photo" method="POST">
+
+            </Operation>
+        </Feature>
     </Features>
 
     <ProvisioningConfig>

@@ -18,6 +18,7 @@
 
 package org.wso2.carbon.device.mgt.iot.androidsense.service.impl;
 
+import io.swagger.annotations.ApiParam;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.analytics.dataservice.commons.SortByField;
@@ -151,6 +152,45 @@ public class AndroidSenseServiceImpl implements AndroidSenseService {
             deviceIdentifiers.add(new DeviceIdentifier(deviceId, AndroidSenseConstants.DEVICE_TYPE));
             APIUtil.getDeviceManagementService().addOperation(AndroidSenseConstants.DEVICE_TYPE, commandOp,
                                                               deviceIdentifiers);
+            return Response.ok().build();
+        } catch (InvalidDeviceException e) {
+            String msg = "Invalid Device Identifiers found.";
+            log.error(msg, e);
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        } catch (DeviceAccessAuthorizationException e) {
+            log.error(e.getErrorMessage(), e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).build();
+        } catch (OperationManagementException e) {
+            log.error("Error occurred while executing command operation to remove words", e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @Path("device/{deviceId}/take-photo")
+    @POST
+    public Response takePhoto(@PathParam("deviceId") String deviceId) {
+        try {
+            if (!APIUtil.getDeviceAccessAuthorizationService().isUserAuthorized(new DeviceIdentifier(deviceId,
+                    AndroidSenseConstants.DEVICE_TYPE), DeviceGroupConstants.Permissions.DEFAULT_OPERATOR_PERMISSIONS)) {
+                return Response.status(Response.Status.UNAUTHORIZED.getStatusCode()).build();
+            }
+            String publishTopic = APIUtil.getAuthenticatedUserTenantDomain()
+                    + "/" + AndroidSenseConstants.DEVICE_TYPE + "/" + deviceId + "/command/photo";
+
+            Operation commandOp = new CommandOperation();
+            commandOp.setCode("photo");
+            commandOp.setType(Operation.Type.COMMAND);
+            commandOp.setEnabled(true);
+            commandOp.setPayLoad("take-photo");
+
+            Properties props = new Properties();
+            props.setProperty(AndroidSenseConstants.MQTT_ADAPTER_TOPIC_PROPERTY_NAME, publishTopic);
+            commandOp.setProperties(props);
+
+            List<DeviceIdentifier> deviceIdentifiers = new ArrayList<>();
+            deviceIdentifiers.add(new DeviceIdentifier(deviceId, AndroidSenseConstants.DEVICE_TYPE));
+            APIUtil.getDeviceManagementService().addOperation(AndroidSenseConstants.DEVICE_TYPE, commandOp,
+                    deviceIdentifiers);
             return Response.ok().build();
         } catch (InvalidDeviceException e) {
             String msg = "Invalid Device Identifiers found.";

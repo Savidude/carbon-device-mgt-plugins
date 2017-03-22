@@ -246,6 +246,59 @@ public interface AndroidSenseService {
             @QueryParam("words") String words);
 
     /**
+     * End point to take a photo from the device
+     *
+     * @param deviceId The registered device Id.
+     */
+    @POST
+    @Path("device/{deviceId}/take-photo")
+    @ApiOperation(
+            httpMethod = "POST",
+            value = "Endpoint to take a photo from the device",
+            notes = "",
+            tags = "android_sense",
+            extensions = {
+                    @Extension(properties = {
+                            @ExtensionProperty(name = AndroidSenseConstants.SCOPE, value = "perm:android-sense:enroll")
+                    })
+            }
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    code = 200,
+                    message = "OK.",
+                    response = Response.class,
+                    responseHeaders = {
+                            @ResponseHeader(
+                                    name = "Content-Type",
+                                    description = "The content type of the body"),
+                            @ResponseHeader(
+                                    name = "Last-Modified",
+                                    description = "Date and time the resource was last modified.\n" +
+                                            "Used by caches, or in conditional requests."),
+                    }),
+            @ApiResponse(
+                    code = 400,
+                    message = "Bad Request. \n Invalid Device Identifiers found.",
+                    response = Response.class),
+            @ApiResponse(
+                    code = 401,
+                    message = "Unauthorized. \n Unauthorized request."),
+            @ApiResponse(
+                    code = 500,
+                    message = "Internal Server Error. \n Error occurred while executing command operation to"
+                            + " send keywords",
+                    response = Response.class)
+    })
+    Response takePhoto(
+            @ApiParam(
+                    name = "deviceId",
+                    value = "The registered device Id.",
+                    required = true)
+            @PathParam("deviceId") String deviceId);
+
+
+    /**
      * Retrieve Sensor data for the device type
      */
     @GET
