@@ -168,7 +168,7 @@ public class AndroidSenseServiceImpl implements AndroidSenseService {
 
     @Path("device/{deviceId}/take-photo")
     @POST
-    public Response takePhoto(@PathParam("deviceId") String deviceId) {
+    public Response takePhoto(@PathParam("deviceId") String deviceId, @QueryParam("sessionId") String sessionId) {
         try {
             if (!APIUtil.getDeviceAccessAuthorizationService().isUserAuthorized(new DeviceIdentifier(deviceId,
                     AndroidSenseConstants.DEVICE_TYPE), DeviceGroupConstants.Permissions.DEFAULT_OPERATOR_PERMISSIONS)) {
@@ -182,6 +182,8 @@ public class AndroidSenseServiceImpl implements AndroidSenseService {
             commandOp.setType(Operation.Type.COMMAND);
             commandOp.setEnabled(true);
             commandOp.setPayLoad("take-photo");
+
+            //carbon.super/android_sense/00000000-35b3-d51d-9edf-c3472d069b2c/command/photo
 
             Properties props = new Properties();
             props.setProperty(AndroidSenseConstants.MQTT_ADAPTER_TOPIC_PROPERTY_NAME, publishTopic);

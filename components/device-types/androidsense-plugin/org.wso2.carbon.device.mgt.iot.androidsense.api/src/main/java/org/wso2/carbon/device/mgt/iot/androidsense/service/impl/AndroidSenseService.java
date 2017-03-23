@@ -295,7 +295,12 @@ public interface AndroidSenseService {
                     name = "deviceId",
                     value = "The registered device Id.",
                     required = true)
-            @PathParam("deviceId") String deviceId);
+            @PathParam("deviceId") String deviceId,
+            @ApiParam(
+                    name = "sessionId",
+                    value = "The session ID value tat should be given to the device such that it is sent back to the server.",
+                    required = true)
+            @QueryParam("sessionId") String words);
 
 
     /**

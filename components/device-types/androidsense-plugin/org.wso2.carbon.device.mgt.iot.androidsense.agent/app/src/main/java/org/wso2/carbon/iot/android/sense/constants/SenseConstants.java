@@ -27,6 +27,8 @@ public class SenseConstants {
     public static final String EVENT_LISTENER_FINISHED = "xxFinishedxx";
     public static final String EVENT_LISTENER_ONGOING = "xxOngoingxx";
 
+    public static final int TAKE_PHOTO_CODE = 0;
+
     public final class Request {
         public final static String REQUEST_SUCCESSFUL = "200";
         public final static int MAX_ATTEMPTS = 2;

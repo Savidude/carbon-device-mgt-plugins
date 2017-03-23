@@ -25,6 +25,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.wso2.carbon.iot.android.sense.data.publisher.mqtt.transport.MQTTTransportHandler;
 import org.wso2.carbon.iot.android.sense.data.publisher.mqtt.transport.TransportHandlerException;
 import org.wso2.carbon.iot.android.sense.constants.SenseConstants;
+import org.wso2.carbon.iot.android.sense.imageCapture.Camera;
 import org.wso2.carbon.iot.android.sense.speech.detector.util.ProcessWords;
 import org.wso2.carbon.iot.android.sense.util.LocalRegistry;
 
@@ -144,6 +145,8 @@ public class AndroidSenseMQTTHandler extends MQTTTransportHandler {
                 for (String word: words) {
                     ProcessWords.removeWord(word);
                 }
+            } else if (topic.contains("photo")){
+                Camera.takePicture();
             }
         } else {
             String errorMsg =

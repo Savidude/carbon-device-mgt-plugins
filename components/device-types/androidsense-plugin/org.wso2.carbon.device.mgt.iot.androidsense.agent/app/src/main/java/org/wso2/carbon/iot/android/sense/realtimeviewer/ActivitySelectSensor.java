@@ -17,17 +17,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.FileProvider;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,10 +44,12 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import org.wso2.carbon.iot.android.sense.RegisterActivity;
 import org.wso2.carbon.iot.android.sense.bmonitor.BeaconMonitoringActivity;
+import org.wso2.carbon.iot.android.sense.constants.SenseConstants;
 import org.wso2.carbon.iot.android.sense.data.publisher.DataPublisherReceiver;
 import org.wso2.carbon.iot.android.sense.data.publisher.DataPublisherService;
 import org.wso2.carbon.iot.android.sense.event.SenseScheduleReceiver;
 import org.wso2.carbon.iot.android.sense.event.SenseService;
+import org.wso2.carbon.iot.android.sense.imageCapture.Camera;
 import org.wso2.carbon.iot.android.sense.realtimeviewer.datastore.TempStore;
 import org.wso2.carbon.iot.android.sense.realtimeviewer.event.RealTimeSensorChangeReceiver;
 import org.wso2.carbon.iot.android.sense.realtimeviewer.event.realtimesensor.RealTimeSensorReader;
@@ -53,6 +60,10 @@ import org.wso2.carbon.iot.android.sense.speech.detector.WordRecognitionActivity
 import org.wso2.carbon.iot.android.sense.beacon.MonitoringActivity;
 
 import org.wso2.carbon.iot.android.sense.util.LocalRegistry;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -165,6 +176,8 @@ public class ActivitySelectSensor extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Camera.setActivity(this);
     }
 
     @Override
@@ -242,7 +255,23 @@ public class ActivitySelectSensor extends AppCompatActivity
         return true;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == SenseConstants.TAKE_PHOTO_CODE) {
+            if (resultCode == RESULT_OK) {
 
+                try {
+                    final InputStream imageStream = getContentResolver().openInputStream(Camera.getFile());
+                    final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                    String encodedImage = encodeImage(selectedImage);
+
+                    //TODO: Send encoded image through websocket
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
     @Override
     public void onDialogPositiveClick(SelectSensorDialog dialog) {
@@ -352,4 +381,18 @@ public class ActivitySelectSensor extends AppCompatActivity
 //        }
 //
 //    }
+
+    /*
+    http://stackoverflow.com/questions/36189503/take-picture-and-convert-to-base64
+     */
+    private String encodeImage(Bitmap bm)
+    {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG,100,baos);
+        byte[] b = baos.toByteArray();
+        String encImage = Base64.encodeToString(b, Base64.DEFAULT);
+
+        return encImage;
+    }
+
 }

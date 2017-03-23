@@ -40,6 +40,8 @@
            aria-controls="event_log">Operations Log</a></li>
     <li><a class="list-group-item location_tab" href="#geo_dashboard" role="tab" data-toggle="tab"
            aria-controls="geo_dashboard">Device Location</a></li>
+    <li><a class="list-group-item" href="#photo_dashboard" role="tab" data-toggle="tab"
+           aria-controls="photo_dashboard">Photos</a></li>
 {{/zone}}
 
 {{#zone "device-view-tab-contents"}}
@@ -98,6 +100,14 @@
         {{/if}}
         <div id="chartWrapper">
         </div>
+    </div>
+    <div class="panel panel-default tab-pane"
+         id="photo_dashboard" role="tabpanel" aria-labelledby="photo_dashboard">
+        <div class="panel-heading">Photos</div>
+        <a id="zoom-image" href="{{@unit.publicUri}}/images/android-sense-icon.png" target="_blank">
+            <img id="img" src="{{@unit.publicUri}}/images/android-sense-icon.png"
+                 style="width: 40% ; height: 40% ; float: left" class="img-responsive"/>
+        </a>
     </div>
 {{/zone}}
 {{#zone "bottomJs"}}
