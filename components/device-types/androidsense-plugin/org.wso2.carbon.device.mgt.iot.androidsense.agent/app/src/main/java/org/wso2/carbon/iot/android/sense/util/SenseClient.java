@@ -15,16 +15,13 @@ package org.wso2.carbon.iot.android.sense.util;
 
 
 import android.content.Context;
-import android.os.Build;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.wso2.carbon.iot.android.sense.constants.SenseConstants;
 import org.wso2.carbon.iot.android.sense.util.dto.RegisterInfo;
 
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
-import java.util.logging.Handler;
 
 /**
  * This Client is used for http communication with the server.
@@ -67,6 +64,27 @@ public class SenseClient {
             String endpoint = LocalRegistry.getServerURL(context);
             senseClientAsyncExecutor.execute(username, password, deviceId, endpoint);
             Map<String, String> response = senseClientAsyncExecutor.get();
+            if (response != null) {
+                return response;
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            Log.e("Send Sensor Data", "Thread Interruption for endpoint " + LocalRegistry.getServerURL(context));
+        } catch (ExecutionException e) {
+            Log.e("Send Sensor Data", "Failed to push data to the endpoint " + LocalRegistry.getServerURL(context));
+        }
+        return null;
+    }
+
+    public Map<String, String> uploadWithTimeWait(String encodedImage) {
+        String endpoint = LocalRegistry.getServerURL(context);
+        String accessToken = LocalRegistry.getAccessToken(context);
+        String deviceId = LocalRegistry.getDeviceId(context);
+
+        try {
+            SenseUploadAsyncExecutor senseUploadAsyncExecutor = new SenseUploadAsyncExecutor();
+            senseUploadAsyncExecutor.execute(endpoint, accessToken, deviceId, encodedImage);
+            Map<String, String> response = senseUploadAsyncExecutor.get();
             if (response != null) {
                 return response;
             }

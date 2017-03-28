@@ -50,6 +50,7 @@ import org.wso2.carbon.iot.android.sense.data.publisher.DataPublisherService;
 import org.wso2.carbon.iot.android.sense.event.SenseScheduleReceiver;
 import org.wso2.carbon.iot.android.sense.event.SenseService;
 import org.wso2.carbon.iot.android.sense.imageCapture.Camera;
+import org.wso2.carbon.iot.android.sense.imageCapture.ImageDataPublisher;
 import org.wso2.carbon.iot.android.sense.realtimeviewer.datastore.TempStore;
 import org.wso2.carbon.iot.android.sense.realtimeviewer.event.RealTimeSensorChangeReceiver;
 import org.wso2.carbon.iot.android.sense.realtimeviewer.event.realtimesensor.RealTimeSensorReader;
@@ -68,6 +69,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import org.altbeacon.beacon.BeaconManager;
+import org.wso2.carbon.iot.android.sense.util.SenseClient;
 
 import agent.sense.android.iot.carbon.wso2.org.wso2_senseagent.R;
 
@@ -265,7 +267,11 @@ public class ActivitySelectSensor extends AppCompatActivity
                     final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                     String encodedImage = encodeImage(selectedImage);
 
-                    //TODO: Send encoded image through websocket
+                    ImageDataPublisher publisher = new ImageDataPublisher(encodedImage, getApplicationContext());
+                    publisher.publishImageData();
+
+//                    SenseClient client = new SenseClient(getApplicationContext());
+//                    client.uploadWithTimeWait(encodedImage);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }

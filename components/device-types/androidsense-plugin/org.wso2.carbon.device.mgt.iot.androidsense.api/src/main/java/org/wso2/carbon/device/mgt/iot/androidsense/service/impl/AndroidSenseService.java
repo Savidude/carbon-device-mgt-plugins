@@ -412,5 +412,47 @@ public interface AndroidSenseService {
                     required = true)
             @QueryParam("deviceName") String deviceName);
 
+    /**
+     * Enroll devices.
+     */
+    @POST
+    @Path("device/{device_id}/upload")
+    @ApiOperation(
+            httpMethod = "POST",
+            value = "Upload photo",
+            notes = "",
+            response = Response.class,
+            tags = "android_sense",
+            extensions = {
+                    @Extension(properties = {
+                            @ExtensionProperty(name = AndroidSenseConstants.SCOPE, value = "perm:android-sense:enroll")
+                    })
+            }
+    )
+    @ApiResponses(value = {
+            @ApiResponse(
+                    code = 202,
+                    message = "Accepted.",
+                    response = Response.class),
+            @ApiResponse(
+                    code = 406,
+                    message = "Not Acceptable"),
+            @ApiResponse(
+                    code = 500,
+                    message = "Internal Server Error. \n Error on retrieving stats",
+                    response = Response.class)
+    })
+    Response upload(
+            @ApiParam(
+                    name = "deviceId",
+                    value = "Device identifier id of the device to be added",
+                    required = true)
+            @PathParam("device_id") String deviceId,
+            @ApiParam(
+                    name = "encodedImage",
+                    value = "Base64 encoded String of image",
+                    required = true)
+            @QueryParam("encodedImage") String encodedImage);
+
 }
 

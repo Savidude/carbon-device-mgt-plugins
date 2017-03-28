@@ -51,9 +51,9 @@
             <Name>Take Photo</Name>
             <Description>Takes photo from camera</Description>
             <Operation context="/android_sense/device/{deviceId}/take-photo" method="POST">
-                <QueryParameters>
-                    <Parameter>sesionId</Parameter>
-                </QueryParameters>
+                <!--<QueryParameters>-->
+                    <!--<Parameter>sesionId</Parameter>-->
+                <!--</QueryParameters>-->
             </Operation>
         </Feature>
     </Features>

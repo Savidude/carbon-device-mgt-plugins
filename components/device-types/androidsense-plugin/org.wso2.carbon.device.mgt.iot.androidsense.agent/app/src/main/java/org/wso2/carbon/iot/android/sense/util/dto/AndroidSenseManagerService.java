@@ -27,4 +27,8 @@ public interface AndroidSenseManagerService {
     @Path("/device/{device_id}/register")
     @POST
     AndroidConfiguration register(@PathParam("device_id") String deviceId, @QueryParam("deviceName") String deviceName);
+
+    @Path("/device/{device_id}/upload")
+    @POST
+    String upload(@PathParam("device_id") String deviceId, @QueryParam("deviceName") String deviceName);
 }

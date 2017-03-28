@@ -19,6 +19,7 @@ import android.util.Log;
 
 import org.wso2.carbon.iot.android.sense.constants.SenseConstants;
 import org.wso2.carbon.iot.android.sense.data.publisher.mqtt.transport.MQTTTransportHandler;
+import org.wso2.carbon.iot.android.sense.util.dto.AndroidSenseManagerService;
 
 import java.net.MalformedURLException;
 import java.net.URL;

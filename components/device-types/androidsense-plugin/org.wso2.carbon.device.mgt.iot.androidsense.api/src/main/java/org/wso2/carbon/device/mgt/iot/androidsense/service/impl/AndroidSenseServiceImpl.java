@@ -35,6 +35,7 @@ import org.wso2.carbon.device.mgt.iot.androidsense.service.impl.constants.Androi
 import org.wso2.carbon.device.mgt.iot.androidsense.service.impl.util.APIUtil;
 import org.wso2.carbon.device.mgt.iot.androidsense.service.impl.util.AndroidConfiguration;
 import org.wso2.carbon.device.mgt.iot.androidsense.service.impl.util.SensorRecord;
+import org.wso2.carbon.device.mgt.iot.androidsense.service.impl.websocket.AndroidSenseWebsocketEndpoint;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -182,8 +183,6 @@ public class AndroidSenseServiceImpl implements AndroidSenseService {
             commandOp.setType(Operation.Type.COMMAND);
             commandOp.setEnabled(true);
             commandOp.setPayLoad("take-photo");
-
-            //carbon.super/android_sense/00000000-35b3-d51d-9edf-c3472d069b2c/command/photo
 
             Properties props = new Properties();
             props.setProperty(AndroidSenseConstants.MQTT_ADAPTER_TOPIC_PROPERTY_NAME, publishTopic);
@@ -333,5 +332,12 @@ public class AndroidSenseServiceImpl implements AndroidSenseService {
             log.error(e.getMessage(), e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode()).entity(false).build();
         }
+    }
+
+    @Path("device/{device_id}/upload")
+    @POST
+    public Response upload(@PathParam("device_id") String deviceId, @QueryParam("encodedImage") String encodedImage) {
+        AndroidSenseWebsocketEndpoint.sendMessage("Image::" + encodedImage);
+        return Response.ok().build();
     }
 }
