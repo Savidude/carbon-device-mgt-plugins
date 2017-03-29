@@ -1,0 +1,15 @@
+{
+  "name": "org.wso2.iot.watertank",
+  "version": "1.0.0",
+  "nickName": "water tank",
+  "description": "Water tank data received from device",
+  "metaData": [
+    {"name":"owner","type":"STRING"},
+    {"name":"deviceId","type":"STRING"}
+  ],
+  "payloadData": [
+    {
+      "name": "waterlevel","type": "FLOAT"
+    }
+  ]
+}

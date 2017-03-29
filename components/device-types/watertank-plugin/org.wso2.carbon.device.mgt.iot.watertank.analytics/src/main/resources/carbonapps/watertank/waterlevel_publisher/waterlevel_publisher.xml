@@ -1,0 +1,5 @@
+<eventPublisher name="waterlevel_publisher" processing="enable" statistics="disable" trace="disable" xmlns="http://wso2.org/carbon/eventpublisher">
+    <from streamName="org.wso2.iot.devices.waterlevel" version="1.0.0"/>
+    <mapping customMapping="disable" type="json"/>
+    <to eventAdapterType="websocket-local"/>
+</eventPublisher>
