@@ -34,7 +34,7 @@
 
     <modules>
         <module>android-plugin</module>
-        <module>windows-plugin</module>
+        <!--<module>windows-plugin</module>-->
     </modules>
 
     <build>

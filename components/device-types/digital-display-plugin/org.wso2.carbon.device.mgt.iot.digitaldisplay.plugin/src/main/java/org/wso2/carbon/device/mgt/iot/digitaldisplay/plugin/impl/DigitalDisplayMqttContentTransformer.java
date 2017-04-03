@@ -29,6 +29,11 @@ import java.util.Map;
 
 public class DigitalDisplayMqttContentTransformer implements ContentTransformer {
     @Override
+    public String getType() {
+        return null;
+    }
+
+    @Override
     public Object transform(Object message, Map<String, Object> dynamicProperties) {
         return message;
     }
