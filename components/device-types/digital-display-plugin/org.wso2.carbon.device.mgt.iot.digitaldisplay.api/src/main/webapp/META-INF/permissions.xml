@@ -45,8 +45,8 @@
     </Permission>
     <Permission>
         <name>Download device</name>
-        <path>/device-mgt/user/devices/add</path>
-        <url>/devices/*/download</url>
+        <path>/device-mgt/user/devices</path>
+        <url>/device/download</url>
         <method>GET</method>
         <scope>digitaldisplay_user</scope>
     </Permission>

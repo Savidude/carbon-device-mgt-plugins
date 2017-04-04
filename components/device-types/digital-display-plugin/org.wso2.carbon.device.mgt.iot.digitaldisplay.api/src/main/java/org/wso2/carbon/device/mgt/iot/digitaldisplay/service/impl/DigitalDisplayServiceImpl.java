@@ -131,7 +131,10 @@ public class DigitalDisplayServiceImpl implements DigitalDisplayService{
         }
     }
 
-    public Response downloadSketch(String deviceName) {
+    @Path("device/download")
+    @GET
+    @Produces("application/zip")
+    public Response downloadSketch(String deviceName, String sketchType) {
         try {
             ZipArchive zipFile = createDownloadFile(APIUtil.getAuthenticatedUser(), deviceName);
             Response.ResponseBuilder response = Response.ok(FileUtils.readFileToByteArray(zipFile.getZipFile()));

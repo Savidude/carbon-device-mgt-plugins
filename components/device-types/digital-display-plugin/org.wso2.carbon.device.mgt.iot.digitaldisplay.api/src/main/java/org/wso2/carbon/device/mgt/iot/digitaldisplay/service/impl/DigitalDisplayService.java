@@ -18,12 +18,9 @@ package org.wso2.carbon.device.mgt.iot.digitaldisplay.service.impl;
  * under the License.
  */
 
-import io.swagger.annotations.SwaggerDefinition;
-import io.swagger.annotations.Info;
-import io.swagger.annotations.ExtensionProperty;
-import io.swagger.annotations.Extension;
-import io.swagger.annotations.Tag;
+import io.swagger.annotations.*;
 import org.wso2.carbon.apimgt.annotations.api.Scope;
+import org.wso2.carbon.apimgt.annotations.api.Scopes;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -41,11 +38,24 @@ import javax.ws.rs.core.Response;
                 }
         ),
         tags = {
-                @Tag(name = "digitaldisplay", description = "")
+                @Tag(name = "digitaldisplay,device_management", description = "")
+        }
+)
+@Scopes(
+        scopes = {
+                @Scope(
+                        name = "Enroll device",
+                        description = "",
+                        key = "perm:digitaldisplay:enroll",
+                        permissions = {"/device-mgt/devices/enroll/digitaldisplay"}
+                )
         }
 )
 
 public interface DigitalDisplayService {
+    String SCOPE = "scope";
+
+
     @Path("device/{device_id}")
     @PUT
     Response updateDevice(@PathParam("device_id") String deviceId, @QueryParam("name") String name);
@@ -63,8 +73,20 @@ public interface DigitalDisplayService {
     @Path("device/download")
     @GET
     @Produces("application/zip")
-//    @Scope(key = "device:arduino:enroll", name = "", description = "")
-    Response downloadSketch(@QueryParam("deviceName") String customDeviceName);
+    @ApiOperation(
+            consumes = MediaType.APPLICATION_JSON,
+            httpMethod = "GET",
+            value = "Download agent",
+            notes = "",
+            response = Response.class,
+            tags = "digitaldisplay",
+            extensions = {
+                    @Extension(properties = {
+                            @ExtensionProperty(name = SCOPE, value = "perm:digitaldisplay:enroll")
+                    })
+            }
+    )
+    Response downloadSketch(@QueryParam("deviceName") String customDeviceName, @QueryParam("sketchType") String sketchType);
 
 
 
