@@ -20,6 +20,7 @@ package org.wso2.carbon.device.mgt.iot.androidsense.plugins.impl;
 
 import org.json.JSONObject;
 import org.wso2.carbon.device.mgt.iot.androidsense.plugins.model.ImageModel;
+import org.wso2.carbon.device.mgt.iot.androidsense.plugins.websocket.AndroidSenseWebsocketServerEndpoint;
 import org.wso2.carbon.event.input.adapter.core.InputEventAdapterSubscription;
 
 import java.util.HashMap;
@@ -58,7 +59,7 @@ public class AndroidSenseEventAdapterSubscription implements InputEventAdapterSu
                     displayImage.append(image);
                 }
                 images.remove(id);
-//                DigitalDisplayWebSocketServerEndPoint.sendMessage(sessionId, displayScreenShot);
+                AndroidSenseWebsocketServerEndpoint.sendMessage(null, displayImage);
             }
         }
     }

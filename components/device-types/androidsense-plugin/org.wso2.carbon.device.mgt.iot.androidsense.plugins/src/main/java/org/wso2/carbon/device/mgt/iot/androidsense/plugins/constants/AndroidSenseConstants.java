@@ -19,7 +19,7 @@ package org.wso2.carbon.device.mgt.iot.androidsense.plugins.constants;
  */
 
 public class AndroidSenseConstants {
-    public static final String MQTT_ADAPTER_NAME = "digital_display_mqtt";
+    public static final String MQTT_ADAPTER_NAME = "android_sense_mqtt";
     public static final String MQTT_ADAPTER_TYPE = "oauth-mqtt";
     public final static String DEVICE_TYPE_PROVIDER_DOMAIN = "carbon.super";
 

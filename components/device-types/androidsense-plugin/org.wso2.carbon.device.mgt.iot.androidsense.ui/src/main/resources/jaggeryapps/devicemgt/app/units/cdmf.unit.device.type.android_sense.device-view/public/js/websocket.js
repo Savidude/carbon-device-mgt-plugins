@@ -35,8 +35,8 @@ function connect() {
 
     senseClient.onmessage = function (event) {
         var message = event.data;
-        var type = message.split('::')[0];
-        var reply = message.split('::')[1];
+        var type = message.split('||')[0];
+        var reply = message.split('||')[1];
 
         if (type.valueOf() == new String("Image").valueOf()) {
             document.getElementById('img').setAttribute('src', 'data:image/jpeg;base64,' + reply);
