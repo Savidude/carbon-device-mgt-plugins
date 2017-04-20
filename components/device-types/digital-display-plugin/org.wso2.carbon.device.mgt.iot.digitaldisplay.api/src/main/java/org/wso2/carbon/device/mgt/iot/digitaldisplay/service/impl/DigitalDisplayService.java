@@ -38,7 +38,7 @@ import javax.ws.rs.core.Response;
                 }
         ),
         tags = {
-                @Tag(name = "digitaldisplay,device_management", description = "")
+                @Tag(name = "digitaldisplay", description = "")
         }
 )
 @Scopes(
@@ -73,19 +73,19 @@ public interface DigitalDisplayService {
     @Path("device/download")
     @GET
     @Produces("application/zip")
-    @ApiOperation(
-            consumes = MediaType.APPLICATION_JSON,
-            httpMethod = "GET",
-            value = "Download agent",
-            notes = "",
-            response = Response.class,
-            tags = "digitaldisplay",
-            extensions = {
-                    @Extension(properties = {
-                            @ExtensionProperty(name = SCOPE, value = "perm:digitaldisplay:enroll")
-                    })
-            }
-    )
+//    @ApiOperation(
+//            consumes = MediaType.APPLICATION_JSON,
+//            httpMethod = "GET",
+//            value = "Download agent",
+//            notes = "",
+//            response = Response.class,
+//            tags = "digitaldisplay",
+//            extensions = {
+//                    @Extension(properties = {
+//                            @ExtensionProperty(name = SCOPE, value = "perm:digitaldisplay:enroll")
+//                    })
+//            }
+//    )
     Response downloadSketch(@QueryParam("deviceName") String customDeviceName, @QueryParam("sketchType") String sketchType);
 
 
